@@ -11,6 +11,7 @@
     "axios": "^0.18.0",
     "buefy": "^0.6.6",
     "firebase": "^5.2.0",
+    "lodash.clonedeep": "^4.5.0",
     "sweetalert2": "^7.24.4",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
