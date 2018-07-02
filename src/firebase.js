@@ -1,4 +1,5 @@
-import { initializeApp } from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/database'
 
 const config = {
   apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
@@ -6,7 +7,5 @@ const config = {
   projectId: 'subarashii-kanban'
 }
 
-const firebaseApp = initializeApp(config)
-const db = firebaseApp.database()
-
-export default db
+const firebaseApp = firebase.initializeApp(config)
+export const db = firebaseApp.database()

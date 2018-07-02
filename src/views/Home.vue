@@ -25,12 +25,21 @@ import cloneDeep from 'lodash.clonedeep'
 import Header from '@/components/Header'
 import Board from '@/components/Board'
 import ModalForm from '@/components/ModalForm'
+import { db } from '@/firebase'
 
 export default {
   name: 'home',
   components: {
     'v-header': Header,
     'v-board': Board
+  },
+  firebase: {
+    tasks: {
+      source: db.ref('tasks'),
+      cancelCallback (err) {
+        console.error(err)
+      }
+    }
   },
   data () {
     return {
@@ -39,22 +48,6 @@ export default {
         { type: 'to-do', tasks: [] },
         { type: 'in-progress', tasks: [] },
         { type: 'done', tasks: [] }
-      ],
-      tasks: [
-        {
-          title: 'Makan pagi',
-          points: 100,
-          description: 'Makan bubur',
-          assignedTo: 'Mahmud',
-          status: 0
-        },
-        {
-          title: 'Minum air',
-          points: 190,
-          description: 'Minum saja',
-          assignedTo: 'Soleh',
-          status: 2
-        }
       ]
     }
   },
@@ -95,29 +88,29 @@ export default {
   &:visited {
     text-decoration: none;
     border-radius: 50%;
-    transition: all .2s;
+    transition: all 0.2s;
 
     //Change for the <button> element
     cursor: pointer;
     border: 1px solid black;
-    box-shadow: 0 .25rem .5rem rgba(#000,.2);
+    box-shadow: 0 0.25rem 0.5rem rgba(#000, 0.2);
   }
 
   &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 1rem 2rem rgba(#000,.2);
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba(#000, 0.2);
 
-      &::after {
-          transform: scaleX(1.4) scaleY(1.6);
-          opacity: 0;
-      }
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
   }
 
   &:active,
   &:focus {
-      outline: none;
-      transform: translateY(-1px);
-      box-shadow: 0 .5rem 1rem rgba(#000,.2);
+    outline: none;
+    transform: translateY(-1px);
+    box-shadow: 0 0.5rem 1rem rgba(#000, 0.2);
   }
 }
 </style>

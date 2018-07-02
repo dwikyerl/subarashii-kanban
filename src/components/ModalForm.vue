@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import { db } from '@/firebase'
+
 export default {
   name: 'ModalForm',
   data () {
@@ -55,6 +57,14 @@ export default {
       assignedTo: ''
     }
   },
+  firebase: {
+    tasks: {
+      source: db.ref('tasks'),
+      cancelCallback (err) {
+        console.error(err)
+      }
+    }
+  },
   methods: {
     submitNewTask () {
       let points = ('' + this.points).replace(/^0+/, '')
@@ -62,8 +72,17 @@ export default {
         title: this.title,
         description: this.description,
         points: +points || 0,
-        assignedTo: this.assignedTo
+        assignedTo: this.assignedTo,
+        status: 0
       }
+
+      this.$firebaseRefs.tasks.push(newTask)
+      this.$parent.close()
+      this.$toast.open({
+        duration: 1500,
+        message: 'Successfully added new task',
+        type: 'is-success'
+      })
     }
   }
 }
