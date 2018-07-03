@@ -3,7 +3,7 @@ import 'firebase/database'
 
 const config = {
   apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
-  databaseURL: 'https://subarashii-kanban.firebaseio.com',
+  databaseURL: process.env.VUE_APP_FIREBASE_DB_URL,
   projectId: 'subarashii-kanban'
 }
 
